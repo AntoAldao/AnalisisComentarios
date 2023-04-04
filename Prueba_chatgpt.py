@@ -76,7 +76,8 @@ class ChatGPTSentiment:
 
     def sentiment(self, text):
         try:
-            pregunta =[{"role":"system","content":"Eres un asistente que lee los comentarios y responde si un comentario es positivo o negativo o sin contexto, si es positivo resesponde 'positivo' si es negativo responde 'negativo' si no tiene contexto analiza el numero que se muestra al lado del comentario, el mismo va de 0 a 10, donde 0 es 'para nada recomendable' y 10 es 'muy recomendable', y utiliza ese numero para responder si es positivo o negativo. Solo responde con una palabra, sin dar explicaciones. No respondas algo diferente a 'positivo', 'negativo' o 'sin contexto'."}]
+            pregunta =[{"role":"system","content":"Eres un asistente que lee los comentarios y responde si un comentario es positivo o negativo, si es positivo resesponde 'positivo' si es negativo responde 'negativo'. Solo responde con una palabra, sin dar explicaciones. No respondas algo diferente a 'positivo', 'negativo'"}]
+            # pregunta =[{"role":"system","content":"Eres un asistente que lee los comentarios y responde si un comentario es positivo o negativo, si es positivo resesponde 'positivo' si es negativo responde 'negativo' si no tiene contexto analiza el numero que se muestra al lado del comentario, el mismo va de 0 a 10, donde 0 es 'para nada recomendable' y 10 es 'muy recomendable', y utiliza ese numero para responder si es positivo o negativo. Solo responde con una palabra, sin dar explicaciones. No respondas algo diferente a 'positivo', 'negativo' o 'sin contexto'."}]
             pregunta.append({"role":"user","content":text})
             response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
                                                     messages=pregunta, 

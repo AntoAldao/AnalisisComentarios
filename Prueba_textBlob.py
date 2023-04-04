@@ -21,6 +21,11 @@ class TextBlobSentiment:
             analysis = TextBlob(text)
             result = analysis.sentiment.polarity
             result = (result + 1) / 2
-            return result
+            if result>0.6:
+                return "positivo"
+            elif result<0.4:
+                return "negativo"
+            else:
+                return "neutral"
         except:
             return "Error"

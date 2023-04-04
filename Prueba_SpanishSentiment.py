@@ -36,7 +36,12 @@ class SpanishSentimentAnalisis:
         try:
             # sent = sentiment_analysis.SentimentAnalysisSpanish()
             result = self.clf.sentiment(text)
-            return result
+            if result>0.6:
+                return "positivo"
+            elif result<0.4:
+                return "negativo"
+            else:
+                return "neutral"
         except:
             return "Error"
 

@@ -6,16 +6,20 @@ import time
 
 ## leer archivo libro 1.xlsx
 df = pd.read_excel("Libro1.xlsx")
-df = df.dropna()
+df = df.dropna() ## eliminar filas con valores nulos
 
 ## datos del 1 al 170 
 
 df = df.drop(columns=['Column1']) ## eliminar column1 text-mining no lo necesito 
-print(df[1:170])
+# print(df[1:170])
 
-## eliminar todos los datos que en la columna3 no digan sin contexto
-# df = df.drop(df[df['Colum+n3'] == 'sin contexto'].index)
+## eliminar todos los datos que en la columna3 digan sin contexto
+df = df.drop(df[df['Column3'] == 'sin contexto'].index)
+print(df)
 
+# cambiar el indice del dataframe
+df = df.reset_index(drop=True)
+print(df)
 ## agrego clumna chatgpt, Spanish Sentiment Analisis, BERT, textBlob con valor None 
 df["chatgpt"] = None
 df["Spanish Sentiment Analisis"] = None
@@ -23,15 +27,15 @@ df["BERT"] = None
 df["textBlob"] = None
 
 lista_comentarios = df["Column2"].tolist()
-print(len(lista_comentarios))
+# print(len(lista_comentarios))
 
-# # comentarios = lista_comentarios[1:170]
+# # # comentarios = lista_comentarios[1:170]
 chatGPT = ChatGPTSentiment()
 spanishtAnalisis = SpanishSentimentAnalisis()
 textblob = TextBlobSentiment()
 for i in range(0, len(lista_comentarios)):
     print(i)
-    # print(lista_comentarios[i])
+    print(lista_comentarios[i])
     # print("")
     # print("chatgpt")
     # print(ChatGPTSentiment.sentiment(lista_comentarios[i]))
